@@ -204,7 +204,7 @@ int main()
     // a.print();
     // b.print();
     Container res1 = temp.performOp();
-    // res1.print();
+    res1.print();
 }
 
 // Container(const Container &obj) *this

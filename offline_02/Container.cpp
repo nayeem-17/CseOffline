@@ -20,22 +20,23 @@ class Container
     {
         if (value != NULL)
         {
-            // free memory occupied by value
+            //cout << "Freeing allocated memory for a single integer" << endl;
             delete value;
+            // free memory occupied by value
         }
         if (valueArray != NULL)
         {
+            //cout << "Freeing allocated memory for integer array" << endl;
+            delete[] valueArray;
             // free memory occupied by valueArray
-            delete[] value;
         }
         if (valueMatrix != NULL)
         {
-            // free memory occupied by valueMatrix
+            //cout << "Freeing allocated memory for integer matrix" << endl;
             for (int i = 0; i < firstDim; i++)
-            {
-                delete[] valueMatrix[i];
-            }
+                delete[] * (valueMatrix + i);
             delete[] valueMatrix;
+            // free memory occupied by valueMatrix
         }
         firstDim = 0;
         secondDim = 0;
@@ -59,7 +60,7 @@ public:
     Container(int val)
     {
         cout << "Constructing Container with a single integer parameter" << endl;
-        cout << "______________________________________________________" << endl;
+
         // dynamically allocate memory to the appropriate pointer and initialize it with the argument(s) of this constructor
         value = new int(val);
         valueArray = NULL;
@@ -67,6 +68,7 @@ public:
         firstDim = 0;
         secondDim = 0;
         storedType = INTEGER;
+        cout << "____________________________" << *this->value << "__________________________" << endl;
     }
 
     Container(int *valArr, int len)
@@ -74,9 +76,12 @@ public:
         cout << "Constructing Container with integer array parameter" << endl;
         cout << "___________________________________________________" << endl;
         // dynamically allocate memory to the appropriate pointer and initialize with the argument(s) of this constructor
-        valueArray = new int[len];
-        valueArray = valArr;
         value = NULL;
+        valueArray = new int[len];
+        for (int i = 0; i < len; i++)
+        {
+            valueArray[i] = valArr[i];
+        }
         valueMatrix = NULL;
         firstDim = len;
         secondDim = 0;
@@ -87,105 +92,92 @@ public:
     {
         cout << "Constructing Container with integer matrix parameter" << endl;
         cout << "____________________________________________________" << endl;
-        // dynamically allocate memory to the appropriate pointer and initialize with the argument(s)
         valueMatrix = new int *[r];
         for (int i = 0; i < r; i++)
         {
             valueMatrix[i] = new int[c];
+            for (int j = 0; j < c; j++)
+            {
+                valueMatrix[i][j] = valMat[i][j];
+            }
         }
-        valueMatrix = valMat;
-        // assign appropriate values to the remaining member variables by observing the previous constructors
         value = NULL;
         valueArray = NULL;
-        firstDim = r;
         secondDim = c;
-        storedType = INT_MATRIX;
+        firstDim = r;
+        storedType = 3;
+        // dynamically allocate memory to the appropriate pointer and initialize with the argument(s)
+        // assign appropriate values to the remaining member variables by observing the previous constructors
     }
-
-    // write a copy constructor whose first two lines should be as follows:
-    // cout << "Calling copy constructor of Container" << endl;
-    // cout << "_____________________________________" << endl;
-
-    Container(const Container &ob)
+    Container(const Container &obj)
     {
         cout << "Calling copy constructor of Container" << endl;
         cout << "_____________________________________" << endl;
-        firstDim = ob.firstDim;
-        secondDim = ob.secondDim;
-        storedType = ob.storedType;
-
-        if (ob.storedType == -1)
+        int temp = obj.storedType;
+        storedType = temp;
+        if (temp == 1)
+            value = new int, *value = *(obj.value);
+        valueMatrix = NULL, valueArray = NULL, firstDim = 0, secondDim = 0;
+        if (temp == 2)
         {
-            value = NULL;
-            valueArray = NULL;
-            valueMatrix = NULL;
-        }
-
-        if (ob.storedType == INTEGER)
-        {
-            value = new int(*ob.value);
-            valueArray = NULL;
-            valueMatrix = NULL;
-        }
-
-        if (ob.storedType == INT_ARRAY)
-        {
-            valueArray = new int[firstDim];
-            for (int i = 0; i < ob.firstDim; i++)
+            valueArray = new int[obj.firstDim];
+            for (int i = 0; i < obj.firstDim; i++)
             {
-                valueArray[i] = ob.valueArray[i];
+                valueArray[i] = obj.valueArray[i];
             }
             value = NULL;
             valueMatrix = NULL;
+            firstDim = obj.firstDim;
+            secondDim = 0;
         }
-
-        if (ob.storedType == INT_MATRIX)
+        if (temp == 3)
         {
-            valueMatrix = new int *[ob.firstDim];
-            for (int i = 0; i < ob.firstDim; i++)
+            firstDim = obj.firstDim;
+            secondDim = obj.secondDim;
+            valueMatrix = new int *[obj.firstDim];
+            for (int i = 0; i < obj.firstDim; i++)
             {
-                valueMatrix[i] = new int[ob.secondDim];
-                for (int j = 0; j < ob.secondDim; j++)
+                valueMatrix[i] = new int[obj.secondDim];
+                for (int j = 0; j < obj.secondDim; j++)
                 {
-                    valueMatrix[i][j] = ob.valueMatrix[i][j];
+                    valueMatrix[i][j] = obj.valueMatrix[i][j];
                 }
             }
             value = NULL;
             valueArray = NULL;
         }
     }
+    // write a copy constructor whose first two lines should be as follows:
+    // cout << "Calling copy constructor of Container" << endl;
+    // cout << "_____________________________________" << endl;
 
     void setItem(int val)
     {
         reset();
-        // write necessary code similar to that of the 2nd constructor
         value = new int(val);
-        valueMatrix = NULL;
         valueArray = NULL;
+        valueMatrix = NULL;
         firstDim = 0;
         secondDim = 0;
         storedType = INTEGER;
+        // write necessary code similar to that of the 2nd constructor
     }
-
-    // overload setItem function so that it can dynamically allocate and initialize the member integer array
-    // observe the 3rd constructor to understand its parameters and tasks
-
     void setItem(int *valArr, int len)
     {
         reset();
+        value = NULL;
         valueArray = new int[len];
         for (int i = 0; i < len; i++)
         {
             valueArray[i] = valArr[i];
         }
+        valueMatrix = NULL;
         firstDim = len;
         secondDim = 0;
         storedType = INT_ARRAY;
     }
-
-    // overload setItem function so that it can dynamically allocate and initialize the member integer matrix
-    // observe the 4th constructor to understand its parameters and tasks
-
+    // overload setItem function so that it can dynamically allocate and initialize the member integer array
+    // observe the 3rd constructor to understand its parameters and tasks
     void setItem(int **valMat, int r, int c)
     {
         reset();
@@ -198,10 +190,13 @@ public:
                 valueMatrix[i][j] = valMat[i][j];
             }
         }
+        value = NULL;
+        valueArray = NULL;
         firstDim = r;
         secondDim = c;
-        storedType = INT_MATRIX;
     }
+    // overload setItem function so that it can dynamically allocate and initialize the member integer matrix
+    // observe the 4th constructor to understand its parameters and tasks
 
     // the following function returns a void* which can be cast to any pointer based on the storedType variable
     void *getItem()
@@ -271,25 +266,24 @@ public:
         if (value != NULL)
         {
             cout << "Freeing allocated memory for a single integer" << endl;
-            // free memory occupied by value
             delete value;
+            // free memory occupied by value
         }
         if (valueArray != NULL)
         {
             cout << "Freeing allocated memory for integer array" << endl;
-            // free memory occupied by valueArray
             delete[] valueArray;
+            // free memory occupied by valueArray
         }
         if (valueMatrix != NULL)
         {
             cout << "Freeing allocated memory for integer matrix" << endl;
-            // free memory occupied by valueMatrix
             for (int i = 0; i < firstDim; i++)
-            {
-                delete[] valueMatrix[i];
-            }
+                delete[] * (valueMatrix + i);
             delete[] valueMatrix;
+            // free memory occupied by valueMatrix
         }
+        //  cout<<";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;"<<storedType<<";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;"<<endl;
         firstDim = 0;
         secondDim = 0;
         storedType = -1;
