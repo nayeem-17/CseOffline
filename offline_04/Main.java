@@ -1,3 +1,5 @@
+package offline_04;
+
 import java.util.Random;
 
 public class Main {
