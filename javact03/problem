@@ -1,0 +1,33 @@
+Instructions
+Consider the following class:
+
+class Product {
+    private String name;
+    private double price;
+
+    Product (String name, double price) {
+        this.name = name;
+        this.price = price;
+    }
+    public String getName() {
+        return this.name;
+    }  
+    public double getPrice() {
+        return this.price;
+    }
+}
+
+Write Java code for the following:
+        
+        Define an ArrayList named myProducts that can store a list of Product       
+
+        Generate 5 random Product with names 'A' to 'E' and random 
+        price and add them to myProducts             
+
+        Add a new Product with name ‘PDummy’ and price 1000 at index 1 of myProducts                
+
+        Sort myProducts based on Product’s price in ascending order. 
+        You can't use your own sorting techniques.
+        You can change the Product class if necessary                           
+        
+        Print all the Product objects of myProducts                                 
