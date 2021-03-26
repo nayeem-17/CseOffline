@@ -6,6 +6,41 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch Problem2",
+            "request": "launch",
+            "mainClass": "level2_term1.DSA.offline3.java.Problem2",
+            "projectName": "CseOffline_ac0749c8"
+        },
+        {
+            "type": "java",
+            "name": "Launch Queue",
+            "request": "launch",
+            "mainClass": "level2_term1.DSA.offline3.java.Queue",
+            "projectName": "CseOffline_ac0749c8"
+        },
+        {
+            "type": "java",
+            "name": "Launch Array",
+            "request": "launch",
+            "mainClass": "level2_term1.DSA.offline01.Array",
+            "projectName": "CseOffline_ac0749c8"
+        },
+        {
+            "type": "java",
+            "name": "Launch Main",
+            "request": "launch",
+            "mainClass": "level2_term1.DSA.offline3.java.Main",
+            "projectName": "CseOffline_ac0749c8"
+        },
+        {
+            "type": "java",
+            "name": "Launch Stack",
+            "request": "launch",
+            "mainClass": "level2_term1.DSA.offline3.java.Stack",
+            "projectName": "CseOffline_ac0749c8"
+        },
+        {
+            "type": "java",
             "name": "Launch LinkedList",
             "request": "launch",
             "mainClass": "level2_term1.DSA.offline2.java.LinkedList",
