@@ -17,7 +17,7 @@ public:
     void searchItem(int);
     int getInOrderSuccessor(int);
     int getInOrderPredecessor(int);
-    bool deleteItem(Binary_node *, int);
+    void deleteItem(Binary_node *, int);
     int getItemDepth(int);
     int getMaxItem();
     int getMinItem();
@@ -143,22 +143,18 @@ Binary_node::Binary_node()
 
 int Binary_node::getInOrderSuccessor(int item)
 {
-
     Binary_node *temp = this;
-
     while (true)
     {
-
         if (temp == nullptr)
             return INVALID_NUMBER;
         if (*temp->data == item)
         {
-
             if (temp->parent != nullptr)
             {
                 if (temp->rightChild == nullptr && temp == temp->parent->leftChild)
                     return *temp->parent->data;
-
+                // if leaf
                 if (temp->rightChild == nullptr && temp->leftChild == nullptr)
                 {
                     // if left leaf
@@ -210,10 +206,51 @@ int Binary_node::getInOrderSuccessor(int item)
     }
 }
 
-int Binary_node::getInOrderPredecessor(int)
+int Binary_node::getInOrderPredecessor(int item)
 {
+    if (*this->data == item)
+        return this->leftChild->getMaxItem();
+
+    Binary_node *temp = this;
+    while (true)
+    {
+        if (temp == nullptr)
+            return INVALID_NUMBER;
+        if (item > *temp->data)
+        {
+            temp = temp->rightChild;
+        }
+        else if (item < *temp->data)
+            temp = temp->leftChild;
+        else
+        {
+            if (temp->leftChild == nullptr && temp == temp->parent->rightChild)
+                return *temp->parent->data;
+            // if leaf
+            if (temp->rightChild == nullptr && temp->leftChild == nullptr)
+            {
+                // if right leaf
+                if (temp == temp->parent->rightChild)
+                    return *temp->parent->data;
+                // if left leaf
+                if (temp == temp->parent->leftChild)
+                {
+                    while (true)
+                    {
+                        if (temp->parent == nullptr)
+                            return INVALID_NUMBER;
+                        if (temp->parent->rightChild == temp)
+                            return *temp->parent->data;
+                        temp = temp->parent;
+                    }
+                }
+            }
+
+            return temp->leftChild->getMaxItem();
+        }
+    }
 }
-bool Binary_node::deleteItem(Binary_node *root, int item)
+void Binary_node::deleteItem(Binary_node *root, int item)
 {
     if (*root->data > item)
         return deleteItem(root->leftChild, item);
@@ -221,6 +258,38 @@ bool Binary_node::deleteItem(Binary_node *root, int item)
         return deleteItem(root->rightChild, item);
     else
     {
+        if (root->leftChild == nullptr && root->rightChild == nullptr)
+        {
+            if (root->parent->leftChild == root)
+                root->parent->leftChild = nullptr;
+            else
+                root->parent->rightChild = nullptr;
+            delete root->data;
+            delete root;
+            return;
+        }
+        if (root->leftChild == nullptr)
+        {
+            root->parent->rightChild = root->rightChild;
+            root->rightChild->parent = root->parent;
+            delete root->data;
+            delete root;
+            return;
+        }
+        else if (root->rightChild == nullptr)
+        {
+            root->parent->leftChild = root->leftChild;
+            root->leftChild->parent = root->parent;
+            delete root->data;
+            delete root;
+            return;
+        }
+        else
+        {
+            int min = root->rightChild->getMinItem();
+            *root->data = min;
+            deleteItem(root->rightChild, min);
+        }
     }
 }
 int Binary_node::getItemDepth(int item)
@@ -252,7 +321,6 @@ int Binary_node::getHeight(Binary_node *node)
         return 0;
     int leftMax = getHeight(node->leftChild);
     int rightMax = getHeight(node->rightChild);
-    // cout << leftMax << " " << rightMax << endl;
     return 1 + (leftMax < rightMax ? rightMax : leftMax);
 }
 
@@ -273,12 +341,11 @@ void Binary_node::printInOrder(Binary_node *node)
         return;
     if (node->rightChild == nullptr && node->leftChild == nullptr)
     {
-        cout << *node->data << endl;
+        cout << *node->data << "   ";
         return;
     }
-
     printInOrder(node->leftChild);
-    cout << *node->data << endl;
+    cout << *node->data << "   ";
     printInOrder(node->rightChild);
 }
 void Binary_node::printPostOrder(Binary_node *node)
@@ -287,13 +354,13 @@ void Binary_node::printPostOrder(Binary_node *node)
         return;
     if (node->rightChild == nullptr && node->leftChild == nullptr)
     {
-        cout << *node->data << endl;
+        cout << *node->data << "   ";
         return;
     }
 
     printPostOrder(node->leftChild);
     printPostOrder(node->rightChild);
-    cout << *node->data << endl;
+    cout << *node->data << "   ";
 }
 
 void Binary_node::printPreOrder(Binary_node *node)
@@ -302,41 +369,11 @@ void Binary_node::printPreOrder(Binary_node *node)
         return;
     if (node->rightChild == nullptr && node->leftChild == nullptr)
     {
-        cout << *node->data << endl;
+        cout << *node->data << "   ";
         return;
     }
 
-    cout << *node->data << endl;
+    cout << *node->data << "   ";
     printPreOrder(node->leftChild);
     printPreOrder(node->rightChild);
-}
-
-int main(int argc, char const *argv[])
-{
-    int arr[] = {33, 50, 51, 52, 53, 54, 55, 56, 60, 100, 110, 150};
-    Binary_node a, *b;
-    a.insertItem(100);
-    a.insertItem(50);
-    a.insertItem(150);
-    a.insertItem(60);
-    a.insertItem(55);
-    a.insertItem(110);
-    a.insertItem(33);
-    a.insertItem(56);
-    a.insertItem(54);
-    a.insertItem(53);
-    a.insertItem(52);
-    a.insertItem(51);
-    cout << a.getSize(&a) << endl;
-    cout << a.getMaxItem() << endl;
-    cout << a.getMinItem() << endl;
-    cout << "````````````````````````````````````````````````````````````````````````````````````" << endl;
-    a.printInOrder(&a);
-    // cout << "````````````````````````````````````````````````````````````````````````````````````" << endl;
-    // a.printPostOrder(&a);
-    for (int i : arr)
-        cout << "Inorder successor of " << i << " is " << a.getInOrderSuccessor(i) << endl;
-    cout << "Height " << a.getHeight(&a) << endl;
-
-    cout << "DEPTH of 100 is " << a.getItemDepth(100) << endl;
 }
