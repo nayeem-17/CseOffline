@@ -1,4 +1,4 @@
-package level2_term1.DSA.offline3.java;
+package level2_term1.DSA.offline03.java;
 
 public class Queue {
     private Node node;

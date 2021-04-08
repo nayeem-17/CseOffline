@@ -1,4 +1,4 @@
-package level2_term1.DSA.offline3.java;
+package level2_term1.DSA.offline03.java;
 
 import java.util.Scanner;
 
@@ -185,6 +185,7 @@ public class Problem1 {
         Scanner scanner = new Scanner(System.in);
         try {
             String inputString = scanner.nextLine();
+            double temp = Problem1.calculate(inputString);
             System.out.println("Valid expression, Computed value: " + Problem1.calculate(inputString));
 
         } catch (Throwable t) {

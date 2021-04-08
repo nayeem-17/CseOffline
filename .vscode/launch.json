@@ -8,6 +8,20 @@
             "type": "java",
             "name": "Launch Problem2",
             "request": "launch",
+            "mainClass": "level2_term1.DSA.offline03.java.Problem2",
+            "projectName": "CseOffline_ac0749c8"
+        },
+        {
+            "type": "java",
+            "name": "Launch Problem1",
+            "request": "launch",
+            "mainClass": "level2_term1.DSA.offline03.java.Problem1",
+            "projectName": "CseOffline_ac0749c8"
+        },
+        {
+            "type": "java",
+            "name": "Launch Problem2",
+            "request": "launch",
             "mainClass": "level2_term1.DSA.offline3.java.Problem2",
             "projectName": "CseOffline_ac0749c8"
         },
