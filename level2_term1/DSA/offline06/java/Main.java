@@ -1,4 +1,4 @@
-// package level2_term1.DSA.offline06.java;
+package level2_term1.DSA.offline06.java;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -59,8 +59,8 @@ public class Main {
             startingCity[friend] = city;
         }
 
-        List<Integer> collectedPieces = withBFS(graph, startingCity);
-        // List<Integer> collectedPieces = withDFS(graph, startingCity);
+        // List<Integer> collectedPieces = withBFS(graph, startingCity);
+        List<Integer> collectedPieces = withDFS(graph, startingCity);
 
         int totalCollectedPieces = collectedPieces.stream().mapToInt(a -> a).sum();
         int totalHiddenPieces = graph.getTotalHiddenPieces();

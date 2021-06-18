@@ -1,4 +1,4 @@
-// package level2_term1.DSA.offline06.java;
+package level2_term1.DSA.offline06.java;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -75,7 +75,7 @@ public class Graph {
     }
 
     /**
-     * @return the totoal hiddenPieces
+     * @return the total hiddenPieces
      */
     public int getTotalHiddenPieces() {
         int count = 0;

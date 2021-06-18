@@ -21,21 +21,17 @@ public class QuickSort {
         int i = low + 1, j = high;
         int temp = 0;
         while (true) {
-            // System.out.println("Loop 1");
-            // System.out.println(i + " " + j + " " + Arr[i] + " " + Arr[j]);
             while (Arr[i] <= pivot) {
-                // System.out.println("Loop 2");
                 i++;
                 if (i >= high)
                     break;
             }
             while (pivot <= Arr[j]) {
                 j--;
-                // System.out.println("Loop 3");
-
                 if (j <= low)
                     break;
             }
+
             if (i >= j)
                 break;
             temp = Arr[i];

@@ -4,7 +4,20 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-
+        {
+            "type": "java",
+            "name": "Launch Main",
+            "request": "launch",
+            "mainClass": "level2_term1.DSA.offline08.java.Main",
+            "projectName": "CseOffline_ac0749c8"
+        },
+        {
+            "type": "java",
+            "name": "Launch Main",
+            "request": "launch",
+            "mainClass": "level2_term1.DSA.offline06.java.Main",
+            "projectName": "CseOffline_ac0749c8"
+        },
         {
             "type": "java",
             "name": "Launch Eval",
