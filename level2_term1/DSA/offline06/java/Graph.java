@@ -43,7 +43,6 @@ public class Graph {
      * @param visitedCity
      */
     public void doBFS(int startingCity, boolean[] visitedCity) {
-
         visited[startingCity] = true;
         visitedCity[startingCity] = true;
         List<Integer> nonVisitedCity = new ArrayList<>();

@@ -1,4 +1,4 @@
-package level2_term1.DSA.offline2.java;
+package level2_term1.DSA.offline02.java;
 
 public class Node {
     int playerId;
