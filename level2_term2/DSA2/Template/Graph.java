@@ -1,4 +1,4 @@
-package level2_term2.DSA2.Template;
+package Template;
 
 import java.util.ArrayList;
 import java.util.List;
