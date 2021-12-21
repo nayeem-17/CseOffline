@@ -17,7 +17,7 @@ public class Graph {
 
     public void addEdges(int from, int to) {
         this.nodes.get(from).add(to);
-        this.nodes.get(to).add(from);
+        // this.nodes.get(to).add(from);
     }
 
     public int getLength() {
