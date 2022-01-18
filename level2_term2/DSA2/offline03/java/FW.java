@@ -23,9 +23,9 @@ public class FW {
         for (int i = 1; i < len; i++) {
             for (int j = 1; j < len; j++) {
                 if (result[i][j] == Float.MAX_VALUE)
-                    System.out.print("INF ");
+                    System.out.print("INF   ");
                 else
-                    System.out.print(result[i][j] + " ");
+                    System.out.print(result[i][j] + "   ");
             }
             System.out.println();
         }

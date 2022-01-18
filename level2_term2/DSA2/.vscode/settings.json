@@ -1,6 +1,9 @@
 {
     "files.associations": {
-        "new": "cpp"
+        "new": "cpp",
+        "cmath": "cpp",
+        "ostream": "cpp",
+        "iostream": "cpp"
     },
     "cSpell.words": [
         "Edmonds",
