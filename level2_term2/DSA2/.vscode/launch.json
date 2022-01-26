@@ -5,6 +5,20 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "type": "java",
+            "name": "Launch Node",
+            "request": "launch",
+            "mainClass": "offline06.java.Node",
+            "projectName": "DSA2_d0f2f4e0"
+        },
+        {
+            "type": "java",
+            "name": "Launch Main",
+            "request": "launch",
+            "mainClass": "offline06.java.Main",
+            "projectName": "DSA2_d0f2f4e0"
+        },
+        {
             "name": "g++-7 - Build and debug active file",
             "type": "cppdbg",
             "request": "launch",

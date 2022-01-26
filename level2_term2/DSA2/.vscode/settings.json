@@ -3,10 +3,12 @@
         "new": "cpp",
         "cmath": "cpp",
         "ostream": "cpp",
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "complex": "cpp"
     },
     "cSpell.words": [
         "Edmonds",
+        "heapify",
         "Karp"
     ]
 }
